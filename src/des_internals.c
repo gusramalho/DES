@@ -42,7 +42,7 @@ uint32_t leftOf(uint64_t block) {
 }
 
 uint32_t rightOf(uint64_t block) {
-  return block << 32;
+  return (block << 32) >> 32;
 }
 
 uint64_t permutedChoice1(uint64_t key) {

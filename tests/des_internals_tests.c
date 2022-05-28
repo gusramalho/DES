@@ -16,30 +16,50 @@ char *intTobin(uint64_t value, char *buffer, int buf_size) {
     return buffer;
 }
 
+void test_leftOfInitialPermutation() {
+  uint64_t key      = 0b0110011011010011001010010011101011100110010101011111000010010110;
+  uint32_t expected = 0b01100110110100110010100100111010;
+  uint32_t result = leftOf(key);
+
+  printf("%" PRIu32 "\n%" PRIu32 "\n", expected, result);
+
+  assert(expected == result);
+}
+
+void test_rightOfInitialPermutation() {
+  uint64_t key      = 0b0110011011010011001010010011101011100110010101011111000010010110;
+  uint32_t expected = 0b11100110010101011111000010010110;
+  uint32_t result = rightOf(key);
+
+  printf("%" PRIu32 "\n%" PRIu32 "\n", expected, result);
+  
+  assert(expected == result);
+}
+
 void test_permutedChoice1() {
   char buff[64];
 
   uint64_t key      = 0b0110011011010011001010010011101011100110010101011111000010010110;
   uint64_t expected = 0b0000000011010010011100110101110111101001101110110001000011001010;
-
   uint64_t result = permutedChoice1(key);
 
   printf("%ld\n", result);
 
   intTobin(result, buff, 64);
 
-  printf(buff);
+  printf("%s", buff);
 
- assert(expected == result);
+  assert(expected == result);
 }
 
 void test_leftOfPermutedChoice1() {
   uint64_t key      = 0b0000000011010010011100110101110111101001101110110001000011001010;
   uint32_t expected = 0b00001101001001110011010111011110;
-
   uint32_t result = leftOfPC1(key);
+
   printf("%" PRIu32 "\n%" PRIu32 "\n", expected, result);
- assert(expected == result);
+
+  assert(expected == result);
 }
 
 void test_rightOfPermutedChoice1() {
@@ -53,6 +73,8 @@ void test_rightOfPermutedChoice1() {
 
 int main() {
   //test_permutedChoice1();
+  test_leftOfInitialPermutation();
+  test_rightOfInitialPermutation();
   test_leftOfPermutedChoice1();
   test_rightOfPermutedChoice1();
 
