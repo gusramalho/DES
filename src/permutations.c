@@ -51,6 +51,25 @@ uint64_t permutate56To48(uint64_t block, const int map[48]) {
   return res >> 16;
 }
 
+
+uint64_t permutate32To48(uint32_t block, const int map[48]) {
+  uint64_t block64 = ((uint64_t) block) << 32;
+
+  uint64_t res = 0;
+
+  for (int i = 0; i < 48; i++) {
+    int mappedIdx = map[i] - 1;
+
+    uint64_t pos = (FIRST_BIT_64 >> mappedIdx) & block64;
+
+    res |= mappedIdx >= i 
+      ? pos << (mappedIdx - i) 
+      : pos >> (i - mappedIdx);
+  }
+
+  return res >> 16;
+}
+
 uint32_t rotateLeft(uint32_t value, uint8_t offset) {
   return (value << offset) | (value >> (32 - offset));
 }

@@ -160,6 +160,25 @@ void testKeySchedule() {
   assert(firstRight == currentRight);
 }
 
+void testExpansion() {
+  uint32_t block = 0b11100110010101011111000010010110;
+  uint64_t expected = 0b0000000000000000011100001100001010101011111110100001010010101101;
+  
+  uint64_t result = expansionFn(block);
+
+  assert(expected == result);
+
+
+  printf("Result: %ld", result);
+}
+
+void testSBox() {
+  uint8_t block = 0b00101101;
+  uint64_t result = sbox(block, 0);
+
+  assert(1 == result);
+}
+
 int main() {
    //testRotate28Left();
   // testPermutedChoice1();
@@ -170,8 +189,11 @@ int main() {
   // testPermutedChoice2();
   // testMergeSubkeys();
 
-  testKeySchedule();
+  //testKeySchedule();
  // testRotations();
+
+// testExpansion();
+ testSBox();
 
   return 0;
 }

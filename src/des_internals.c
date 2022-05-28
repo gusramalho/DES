@@ -45,14 +45,16 @@ const int PC2[48] = {
 };
 
 const int E[48] = {
-  4,  5,	6,  7,	8,  9
+  32,	1,	2,	3,	4,	5,
+  4,  5,	6,  7,	8,  9,
   8,  9,	10, 11, 12, 13,
-  12,	13, 14, 15, 16,	17
-  16,	17, 18, 19, 20,	21
-  20,	21, 22, 23, 24,	25
-  24,	25, 26, 27, 28,	29
+  12,	13, 14, 15, 16,	17,
+  16,	17, 18, 19, 20,	21,
+  20,	21, 22, 23, 24,	25,
+  24,	25, 26, 27, 28,	29,
   28,	29, 30, 31, 32,	1
-}
+};
+
 
 uint64_t initialPermutation(uint64_t block) {
   return permutate64(block, IP);
@@ -97,3 +99,15 @@ uint8_t subKeyRotationsOf(uint8_t index) {
       return 2;
   }
 }
+
+uint64_t expansionFn(uint32_t rightBlock) {
+  return permutate32To48(rightBlock, E);
+}
+
+uint8_t sbox(uint8_t block, uint8_t box) {
+  uint8_t shifted = block << 3;
+  uint8_t column = shifted >> 4; 
+  uint8_t row = ((block >> 5) << 1) | (1 & block);
+
+  return row * 16 + column;
+} 

@@ -21,4 +21,6 @@ uint32_t rotate28Left(uint32_t value, uint8_t offset);
 
 uint64_t mergeSubkeys(uint64_t left, uint64_t right);
 
+uint64_t permutate32To48(uint32_t, const int map[48]);
+
 #endif
