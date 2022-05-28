@@ -16,6 +16,16 @@ char *intTobin(uint64_t value, char *buffer, int buf_size) {
     return buffer;
 }
 
+void int32Tobin(uint32_t value, char *buffer, int buf_size) {
+    buffer += (buf_size - 1);
+
+    for (int i = 32; i >= 0; i--) {
+        *buffer-- = (value & 1) + '0';
+
+        value >>= 1;
+    }
+}
+
 void testLeftOfInitialPermutation() {
   uint64_t key      = 0b0110011011010011001010010011101011100110010101011111000010010110;
   uint32_t expected = 0b01100110110100110010100100111010;
@@ -105,18 +115,53 @@ void testPermutedChoice2() {
     assert(expected == result);
 }
 
+void testRotations() {
+  char buff[32];
+  uint32_t key = 3921350858;
+
+      int32Tobin(key, buff, 32);
+
+    printf("First: %s\n", buff);
+
+  uint32_t currentKey = key;
+
+  for (int i = 1; i <= 29; i++) {
+    currentKey = rotate28Left(currentKey, 1);
+
+    int32Tobin(currentKey,buff, 32);
+    printf("Current: %s\n", buff);
+  }
+}
+
 void testKeySchedule() {
   uint64_t originalKey = 0b0110011011010011001010010011101011100110010101011111000010010110;
   uint64_t pc1 = permutedChoice1(originalKey);
 
-  uint32_t subKeyLeft = leftOf(pc1);
-  uint32_t subKeyRight = rightOf(pc1);
+  uint32_t firstLeft = leftOfPC1(pc1);
+  uint32_t firstRight = rightOfPC1(pc1);
 
-  rotate28Left(subKeyLeft, 1);
+  uint32_t currentLeft = firstLeft;
+  uint32_t currentRight = firstRight;
+
+  for (int i = 1; i <= 16; i++) {
+    uint8_t rotations = subKeyRotationsOf(i);
+
+    currentLeft = rotate28Left(currentLeft, rotations);
+    currentRight = rotate28Left(currentRight,rotations);
+
+    printf("Key %i: %lX\n", i, permutedChoice2(mergeSubkeys(currentLeft, currentRight)));
+  }
+
+  printf("First left: %" PRIu32 "\nLast left: %" PRIu32 "\n", firstLeft, currentLeft);
+  printf("First right: %" PRIu32 "\nLast right: %" PRIu32 "\n", firstRight, currentRight);
+
+
+  assert(firstLeft == currentLeft);
+  assert(firstRight == currentRight);
 }
 
 int main() {
-   testRotate28Left();
+   //testRotate28Left();
   // testPermutedChoice1();
   // testLeftOfInitialPermutation();
   // testRightOfInitialPermutation();
@@ -124,6 +169,9 @@ int main() {
   // testRightOfPermutedChoice1();
   // testPermutedChoice2();
   // testMergeSubkeys();
+
+  testKeySchedule();
+ // testRotations();
 
   return 0;
 }

@@ -18,4 +18,6 @@ uint32_t rightOf(uint64_t block);
 
 uint64_t permutedChoice2(uint64_t key);
 
+uint8_t subKeyRotationsOf(uint8_t index);
+
 #endif
