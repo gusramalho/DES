@@ -109,5 +109,5 @@ uint8_t sbox(uint8_t block, uint8_t box) {
   uint8_t column = shifted >> 4; 
   uint8_t row = ((block >> 5) << 1) | (1 & block);
 
-  return row * 16 + column;
+  return S_BOXES[box - 1][row * 16 + column];
 } 

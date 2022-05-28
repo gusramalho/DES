@@ -174,7 +174,7 @@ void testExpansion() {
 
 void testSBox() {
   uint8_t block = 0b00101101;
-  uint64_t result = sbox(block, 0);
+  uint64_t result = sbox(block, 1);
 
   assert(1 == result);
 }
