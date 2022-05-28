@@ -48,3 +48,11 @@ uint32_t rightOf(uint64_t block) {
 uint64_t permutedChoice1(uint64_t key) {
   return permutate56(key, PC1);
 }
+
+uint32_t leftOfPC1(uint64_t key) {
+  return key >> 28;
+}
+
+uint32_t rightOfPC1(uint64_t key) {
+  return (key << 36) >> 36;
+}

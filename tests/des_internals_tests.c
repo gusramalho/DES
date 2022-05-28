@@ -1,7 +1,8 @@
 #include <assert.h>
 #include <stdio.h>
-#include "../src/des_internals.h"
+#include <inttypes.h>
 
+#include "../src/des_internals.h"
 
 char *intTobin(uint64_t value, char *buffer, int buf_size) {
     buffer += (buf_size - 1);
@@ -29,12 +30,31 @@ void test_permutedChoice1() {
 
   printf(buff);
 
- assert(expected == permutedChoice1(key));
+ assert(expected == result);
 }
 
+void test_leftOfPermutedChoice1() {
+  uint64_t key      = 0b0000000011010010011100110101110111101001101110110001000011001010;
+  uint32_t expected = 0b00001101001001110011010111011110;
+
+  uint32_t result = leftOfPC1(key);
+  printf("%" PRIu32 "\n%" PRIu32 "\n", expected, result);
+ assert(expected == result);
+}
+
+void test_rightOfPermutedChoice1() {
+  uint64_t key      = 0b0000000011010010011100110101110111101001101110110001000011001010;
+  uint32_t expected = 0b00001001101110110001000011001010;
+
+  uint32_t result = rightOfPC1(key);
+  printf("%" PRIu32 "\n%" PRIu32 "\n", expected, result);
+  assert(expected == result);
+}
 
 int main() {
-  test_permutedChoice1();
+  //test_permutedChoice1();
+  test_leftOfPermutedChoice1();
+  test_rightOfPermutedChoice1();
 
 
   return 0;
