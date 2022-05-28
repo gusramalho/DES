@@ -16,4 +16,6 @@ uint32_t leftOf(uint64_t block);
 
 uint32_t rightOf(uint64_t block);
 
+uint64_t permutedChoice2(uint64_t key);
+
 #endif
