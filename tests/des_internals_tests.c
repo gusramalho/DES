@@ -189,21 +189,19 @@ void testApplySubstitionBoxes() {
 }
 
 int main() {
-//    testRotate28Left();
-//   testPermutedChoice1();
-//   testLeftOfInitialPermutation();
-//   testRightOfInitialPermutation();
-//   testLeftOfPermutedChoice1();
-//   testRightOfPermutedChoice1();
-//   testPermutedChoice2();
-//   testMergeSubkeys();
-
-//   testKeySchedule();
-//  testRotations();
-
-// testExpansion();
-//  testSBox();
- testApplySubstitionBoxes();
+  testRotate28Left();
+  testPermutedChoice1();
+  testLeftOfInitialPermutation();
+  testRightOfInitialPermutation();
+  testLeftOfPermutedChoice1();
+  testRightOfPermutedChoice1();
+  testPermutedChoice2();
+  testMergeSubkeys();
+  testKeySchedule();
+  testRotations();
+  testExpansion();
+  testSBox();
+  testApplySubstitionBoxes();
 
   return 0;
 }

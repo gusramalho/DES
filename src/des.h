@@ -2,6 +2,7 @@
 #define DES_H
 
 #include "des_internals.h"
+#include "stdio.h"
 
 uint64_t encrypt(uint64_t plainText, uint64_t key);
 

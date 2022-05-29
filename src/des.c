@@ -30,7 +30,7 @@ uint64_t des(uint64_t data, uint64_t key, char isEncryption) {
   for (int i = 0; i < 16; i++) {
     uint64_t subkey = isEncryption ? subkeys[i] : subkeys[15 - i];
 
-    printf("Round %i -> Left: %X Right: %X, Subkey: %X\n", i + 1, leftHalf, rightHalf, subkey);
+    printf("Round %02d -> Left: %08X Right: %08X, Subkey: %lX\n", i + 1, leftHalf, rightHalf, subkey);
     uint32_t encryptedBlockHalf = feistelFunction(rightHalf, subkey) ^ leftHalf;
 
     leftHalf = rightHalf;
