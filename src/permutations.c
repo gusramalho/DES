@@ -1,6 +1,22 @@
 #include "permutations.h"
 #include <inttypes.h>
 
+uint32_t permutate32(uint32_t block, const int map[32]) {
+  uint32_t res = 0;
+
+  for (int i = 0; i < 64; i++) {
+    int mappedIdx = map[i] - 1;
+
+    uint32_t pos = (FIRST_BIT_32 >> mappedIdx) & block;
+
+    res |= mappedIdx >= i 
+      ? pos << (mappedIdx - i) 
+      : pos >> (i - mappedIdx);
+  }
+
+  return res;
+}
+
 uint64_t permutate64(uint64_t block, const int map[64]) {
   uint64_t res = 0;
 

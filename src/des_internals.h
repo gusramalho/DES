@@ -74,4 +74,6 @@ uint64_t expansionFn(uint32_t rightBlock);
 
 uint8_t sbox(uint8_t block, uint8_t box);
 
+uint64_t applySubstitionBoxes(uint64_t block);
+
 #endif

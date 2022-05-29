@@ -7,6 +7,8 @@
 
 #include <inttypes.h>
 
+uint32_t permutate32(uint32_t block, const int map[32]);
+
 uint64_t permutate64(uint64_t block, const int map[64]);
 
 uint64_t permutate56(uint64_t block, const int map[56]);

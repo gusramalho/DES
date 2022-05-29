@@ -179,21 +179,31 @@ void testSBox() {
   assert(1 == result);
 }
 
-int main() {
-   //testRotate28Left();
-  // testPermutedChoice1();
-  // testLeftOfInitialPermutation();
-  // testRightOfInitialPermutation();
-  // testLeftOfPermutedChoice1();
-  // testRightOfPermutedChoice1();
-  // testPermutedChoice2();
-  // testMergeSubkeys();
+void testApplySubstitionBoxes() {
+  uint64_t block = 0b0000000000000000001110001011001100010101000101010010111001001111;
+  uint32_t expected = 0b10000010111100100010110111100100;
+  
+  uint32_t result = applySubstitionBoxes(block);
 
-  //testKeySchedule();
- // testRotations();
+  assert(expected == result);
+}
+
+int main() {
+//    testRotate28Left();
+//   testPermutedChoice1();
+//   testLeftOfInitialPermutation();
+//   testRightOfInitialPermutation();
+//   testLeftOfPermutedChoice1();
+//   testRightOfPermutedChoice1();
+//   testPermutedChoice2();
+//   testMergeSubkeys();
+
+//   testKeySchedule();
+//  testRotations();
 
 // testExpansion();
- testSBox();
+//  testSBox();
+ testApplySubstitionBoxes();
 
   return 0;
 }

@@ -55,6 +55,17 @@ const int E[48] = {
   28,	29, 30, 31, 32,	1
 };
 
+const int P[32] = {
+  16, 7,  20, 21, 
+  29, 12, 28, 17, 
+  1,  15, 23, 26, 
+  5,  18, 31, 10, 
+  2,  8,  24, 14, 
+  32, 27, 3,  9, 
+  19, 13, 30, 6, 
+  22, 11, 4,  25
+};
+
 
 uint64_t initialPermutation(uint64_t block) {
   return permutate64(block, IP);
@@ -111,3 +122,26 @@ uint8_t sbox(uint8_t block, uint8_t box) {
 
   return S_BOXES[box - 1][row * 16 + column];
 } 
+
+uint32_t permutationP(uint32_t block) {
+  return permutate32(block, P);
+}
+
+uint64_t applySubstitionBoxes(uint64_t block) {
+  uint8_t results[8];
+
+  for (int i = 0; i < 8; i++) {
+    uint8_t entry = (block << (16 + 6 * i)) >> 58;
+    results[i] = sbox(entry, i + 1);
+  }
+
+  uint32_t result = 0;
+
+  for (int i = 0; i < 8; i++) {
+    uint32_t aux = results[i];
+
+    result |= aux << 4 * (7 - i);
+  }
+
+  return result;
+}
