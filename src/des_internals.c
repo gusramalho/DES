@@ -66,9 +66,12 @@ const int P[32] = {
   22, 11, 4,  25
 };
 
-
 uint64_t initialPermutation(uint64_t block) {
   return permutate64(block, IP);
+}
+
+uint64_t finalPermutation(uint64_t block) {
+  return permutate64(block, FP);
 }
 
 uint32_t leftOf(uint64_t block) {
@@ -77,6 +80,13 @@ uint32_t leftOf(uint64_t block) {
 
 uint32_t rightOf(uint64_t block) {
   return (block << 32) >> 32;
+}
+
+uint64_t mergeBlockHalves(uint32_t left, uint32_t right) {
+  uint64_t left64 = left;
+  uint64_t res = left64 << 32;
+
+  return res | right;
 }
 
 uint64_t permutedChoice1(uint64_t key) {
@@ -145,3 +155,11 @@ uint64_t applySubstitionBoxes(uint64_t block) {
 
   return result;
 }
+
+uint32_t feistelFunction(uint32_t rightHalf, uint64_t subkey) {
+  uint64_t blockExpanded = expansionFn(rightHalf);
+  uint64_t blockMixedWithSubkey = blockExpanded ^ subkey;
+  uint32_t subsitionBoxResult = applySubstitionBoxes(blockMixedWithSubkey);
+
+  return permutationP(subsitionBoxResult);
+} 

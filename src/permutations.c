@@ -67,7 +67,6 @@ uint64_t permutate56To48(uint64_t block, const int map[48]) {
   return res >> 16;
 }
 
-
 uint64_t permutate32To48(uint32_t block, const int map[48]) {
   uint64_t block64 = ((uint64_t) block) << 32;
 

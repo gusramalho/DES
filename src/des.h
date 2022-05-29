@@ -3,8 +3,8 @@
 
 #include "des_internals.h"
 
-int64_t encrypt(int64_t data);
+uint64_t encrypt(uint64_t plainText, uint64_t key);
 
-int64_t decrypt(int64_t data);
+uint64_t decrypt(uint64_t data, uint64_t key);
 
 #endif

@@ -1,15 +1,19 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <inttypes.h>
-#include "des_internals.h"
+#include "des.h"
 
 int main() {
-  uint64_t key = 0b1000000101000001000100000000100000000000100000100000000001000000;
-  uint64_t exp = 0b0000000000100001100000100000000000000010000000000000000010000100;
+  uint64_t key       = 0b0010000001010000010001000000100000000000100000100000000001000000;
+  uint64_t plainText = 0b1100100010101010101010101010001010101001011000100000101010001010;
 
-  printf("%ld", permutedChoice1(key));
+  printf("Plain text: %lX\n\n", plainText);
 
- // printf("%" PRIu32 "\n", rightOf(e) );
+  uint64_t encrypted = encrypt(plainText, key);
+  printf("Encrypted: %lX\n\n", encrypted);
+
+  uint64_t decrypted = decrypt(encrypted, key);
+  printf("Decrypted: %lX\n\n", decrypted);
 
   return 0;
 }
